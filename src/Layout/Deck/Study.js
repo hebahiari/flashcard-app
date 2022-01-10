@@ -9,33 +9,39 @@ import {
   updateCard,
   deleteCard,
 } from "../../utils/api";
-import { Link } from "react-router-dom";
+import AddCardsButton from "./Cards/AddCardsButton";
+import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function Study({ currentDeck }) {
   const [cardIndex, setCardIndex] = useState(0);
-//   const [currentCard, setCurrentCard] = useState({});
   const [front, setFront] = useState(true);
+  const cards = currentDeck.cards;
 
- 
+const history = useHistory();
+
   if (!currentDeck.cards) {
     return <h3>Loading . . .</h3>;
   }
-
- const cards = currentDeck.cards;
-  console.log(cards.length);
 
   const nextButton = (
     <button
       type="button"
       className="btn btn-secondary m-1"
-      onClick={() => { if (cardIndex !== cards.length) {
-        setCardIndex((currentIndex) => currentIndex + 1);
-        setFront(true); }
-        else {
-            console.log("not enough")
+      onClick={() => {
+        if (cardIndex+1 < cards.length) {
+          console.log(`card index:${cardIndex+1} and cards length:${cards.length}`)
+          setCardIndex((currentIndex) => currentIndex + 1);
+          setFront(true);
+        } else {
+          if (window.confirm("Restart Cards? Click Cancel to go to the Home page")) {
+            history.go()
+          } else {
+            history.push("/")
+          }
         }
-      }}
+      }
+    }
     >
       Next
     </button>
@@ -49,7 +55,7 @@ function Study({ currentDeck }) {
             <Link to="/">Home</Link>
           </li>
           <li className="breadcrumb-item">
-            <Link to="/">{cards[cardIndex].name}</Link>
+            <Link to="/">{currentDeck.name}</Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
             Study
@@ -57,24 +63,37 @@ function Study({ currentDeck }) {
         </ol>
       </nav>
 
-      <h1>Study: {cards[cardIndex].name}</h1>
+      <h1>Study: {currentDeck.name}</h1>
 
-      <div className="card" style={{ width: "40rem" }}>
-        <div className="card-body">
-          <h5 className="card-title">Card {cards[cardIndex].id} of {cards.length}</h5>
-          <p className="card-text">
-            {front ? cards[cardIndex].front : cards[cardIndex].back}
-          </p>
-          <button
-            type="button"
-            className="btn btn-secondary m-1"
-            onClick={() => setFront((currentside) => !currentside)}
-          >
-            Flip
-          </button>
-          {front ? null : nextButton}
+      {currentDeck.cards.length < 3 ? (
+        <span>
+          <h3>Not enough cards</h3>
+          <h5>
+            You need at least 3 cards to study. there are{" "}
+            {currentDeck.cards.length} in this deck.
+          </h5>
+          <AddCardsButton />
+        </span>
+      ) : (
+        <div className="card" style={{ width: "40rem" }}>
+          <div className="card-body">
+            <h5 className="card-title">
+              Card {cardIndex + 1} of {cards.length}
+            </h5>
+            <p className="card-text">
+              {front ? cards[cardIndex].front : cards[cardIndex].back}
+            </p>
+            <button
+              type="button"
+              className="btn btn-secondary m-1"
+              onClick={() => setFront((currentside) => !currentside)}
+            >
+              Flip
+            </button>
+            {front ? null : nextButton}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

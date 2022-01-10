@@ -9,13 +9,15 @@ const [cards, setCards] = useState([]);
   const history = useHistory();
 
 
-  const handleDelete = () => {
-    console.log('deleted')
+  const handleDelete = (event) => {
+    console.log(event.target)
+    if (window.confirm("Delete this deck? You will not be able to recover it.")) {
+    deleteDeck(event.target.id).then(() => history.go(0))}
   }
 
   useEffect(() => {
 
-listDecks().then((data) => setDecks(data)).then(()=> console.log(decks))
+listDecks().then((data) => setDecks(data))
 
   },[])
 
@@ -23,14 +25,18 @@ listDecks().then((data) => setDecks(data)).then(()=> console.log(decks))
   const deckList= decks.map((deck)=> {
     return (  
     
-    <div className="card" style={{ width: "40rem" }}>
+    <div className="card my-3" style={{ width: "40rem" }}>
     <div className="card-body">
       <h5 className="card-title"> {deck.name} </h5>
+      <p className="card-text">
+     {deck.cards.length} Cards
+      </p>
       <p className="card-text">
      {deck.description}
       </p>
 
       <button
+      
         type="button"
         className="btn btn-secondary m-1"
         onClick={() => history.push(`/decks/${deck.id}/study`)}>Study
@@ -43,6 +49,7 @@ listDecks().then((data) => setDecks(data)).then(()=> console.log(decks))
 
 
       <button
+        id={deck.id}
         type="button"
         className="btn btn-secondary m-1"
         onClick={handleDelete}>Delete
