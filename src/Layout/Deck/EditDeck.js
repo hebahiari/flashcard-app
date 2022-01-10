@@ -1,4 +1,4 @@
-import { listDecks, createDeck, readDeck, updateDeck, deleteDeck, createCard, readCard, updateCard, deleteCard} from "../../utils/api"
+import {updateDeck} from "../../utils/api"
 
 function EditDeck() {
     return <p> editdeck </p>

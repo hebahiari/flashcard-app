@@ -1,0 +1,13 @@
+function ViewDeckButton({deckId, key}) {
+
+return (
+<button
+type="button"
+key={key}
+className="btn btn-secondary m-1"
+onClick={() => history.push(`/decks/${deckId}`)}
+>
+View
+</button> )
+
+}

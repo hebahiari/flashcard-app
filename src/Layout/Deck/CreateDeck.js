@@ -1,19 +1,18 @@
-import {
-  listDecks,
-  createDeck,
-  readDeck,
-  updateDeck,
-  deleteDeck,
-  createCard,
-  readCard,
-  updateCard,
-  deleteCard,
-} from "../../utils/api";
-import { Link } from "react-router-dom";
+import { createDeck } from "../../utils/api";
+import { Link, useHistory } from "react-router-dom";
+import { useState } from "react";
 
-function CreateDeck() {
+function CreateNewDeck() {
+  const [newDeck, setNewDeck] = useState({ name: "", description: "" });
+const history = useHistory();
+
+  const handleChange = (event) => {
+    setNewDeck({ ...newDeck, [event.target.name]: event.target.value });
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
+    createDeck(newDeck).then(() => history.push(`/decks/`))
+
   };
 
   return (
@@ -32,24 +31,32 @@ function CreateDeck() {
       <h1>Create Deck</h1>
 
       <form onSubmit={handleSubmit}>
-        <div class="mb-3">
-          <label for="name" class="form-label">
+        <div className="mb-3">
+          <label for="name" className="form-label">
             Name
           </label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="name"
-            aria-describedby="emailHelp"
+            name="name"
+            onChange={handleChange}
+            value={newDeck.name}
           />
         </div>
-        <div class="mb-3">
-          <label for="desciption" class="form-label">
+        <div className="mb-3">
+          <label for="desciption" className="form-label">
             Desciption
           </label>
-          <input type="text" class="form-control" id="desciption" />
+          <textarea
+            className="form-control"
+            id="desciption"
+            name="description"
+            onChange={handleChange}
+            value={newDeck.description}
+          />
         </div>
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" className="btn btn-primary">
           Submit
         </button>
       </form>
@@ -57,4 +64,4 @@ function CreateDeck() {
   );
 }
 
-export default CreateDeck;
+export default CreateNewDeck;
