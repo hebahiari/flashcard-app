@@ -1,4 +1,5 @@
 import { Route, Switch } from "react-router-dom";
+import { useEffect, useState } from "react"
 import React from "react";
 import Header from "./Header";
 import NotFound from "./NotFound";
@@ -7,6 +8,26 @@ import Deck from "./Deck/Deck"
 
 
 function Layout() {
+
+
+
+  // useEffect(()=> {
+
+  //   fetch("http://localhost:8080/decks")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setDecks(data);
+  //     })
+  // },[]);
+
+  // useEffect(()=> {
+
+  //    fetch("http://localhost:8080/cards")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setCards(data);
+  //     })
+  // },[])
 
   return (
     <span>

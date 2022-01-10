@@ -1,5 +1,15 @@
-
-import AddCardsButton from "../Buttons/AddCardsButton";
+import {
+  listDecks,
+  createDeck,
+  readDeck,
+  updateDeck,
+  deleteDeck,
+  createCard,
+  readCard,
+  updateCard,
+  deleteCard,
+} from "../../utils/api";
+import AddCardsButton from "./Cards/AddCardsButton";
 import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -7,7 +17,6 @@ function Study({ currentDeck }) {
   const [cardIndex, setCardIndex] = useState(0);
   const [front, setFront] = useState(true);
   const cards = currentDeck.cards;
-  console.log(currentDeck)
 
 const history = useHistory();
 

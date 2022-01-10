@@ -1,18 +1,19 @@
-import { createDeck } from "../../utils/api";
-import { Link, useHistory } from "react-router-dom";
-import { useState } from "react";
+import {
+  listDecks,
+  createDeck,
+  readDeck,
+  updateDeck,
+  deleteDeck,
+  createCard,
+  readCard,
+  updateCard,
+  deleteCard,
+} from "../../utils/api";
+import { Link } from "react-router-dom";
 
-function CreateNewDeck() {
-  const [newDeck, setNewDeck] = useState({ name: "", description: "" });
-const history = useHistory();
-
-  const handleChange = (event) => {
-    setNewDeck({ ...newDeck, [event.target.name]: event.target.value });
-  };
+function CreateDeck() {
   const handleSubmit = (event) => {
     event.preventDefault();
-    createDeck(newDeck).then(() => history.push(`/decks/`))
-
   };
 
   return (
@@ -31,32 +32,24 @@ const history = useHistory();
       <h1>Create Deck</h1>
 
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label for="name" className="form-label">
+        <div class="mb-3">
+          <label for="name" class="form-label">
             Name
           </label>
           <input
             type="text"
-            className="form-control"
+            class="form-control"
             id="name"
-            name="name"
-            onChange={handleChange}
-            value={newDeck.name}
+            aria-describedby="emailHelp"
           />
         </div>
-        <div className="mb-3">
-          <label for="desciption" className="form-label">
+        <div class="mb-3">
+          <label for="desciption" class="form-label">
             Desciption
           </label>
-          <textarea
-            className="form-control"
-            id="desciption"
-            name="description"
-            onChange={handleChange}
-            value={newDeck.description}
-          />
+          <input type="text" class="form-control" id="desciption" />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" class="btn btn-primary">
           Submit
         </button>
       </form>
@@ -64,4 +57,4 @@ const history = useHistory();
   );
 }
 
-export default CreateNewDeck;
+export default CreateDeck;
