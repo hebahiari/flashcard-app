@@ -11,7 +11,7 @@ import {
 } from "../../utils/api";
 import AddCardsButton from "./Cards/AddCardsButton";
 import { Link, useHistory } from "react-router-dom";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function Study({ currentDeck }) {
   const [cardIndex, setCardIndex] = useState(0);

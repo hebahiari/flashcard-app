@@ -1,20 +1,12 @@
 import { Switch, Route, useParams } from "react-router-dom";
 import {
-  listDecks,
-  createDeck,
   readDeck,
-  updateDeck,
-  deleteDeck,
-  createCard,
-  readCard,
-  updateCard,
-  deleteCard,
 } from "../../utils/api";
 import EditDeck from "./EditDeck";
 import ViewDeck from "./ViewDeck";
 import Study from "./Study.js";
-import CreateDeck from "./CreateDeck";
-import { useEffect, useState } from "react";
+import CreateNewDeck from "./CreateNewDeck";
+import React, { useEffect, useState } from "react";
 
 function Deck() {
   const [currentDeck, setCurrentDeck] = useState({});
@@ -22,7 +14,9 @@ function Deck() {
   const { deckId } = useParams();
 
   useEffect(() => {
+    if (deckId !== "new") {
     readDeck(deckId).then((data) => setCurrentDeck(data));
+    }
   }, []);
 
   return (
@@ -33,7 +27,7 @@ function Deck() {
         </Route>
 
           <Route path="/decks/new">
-          <CreateDeck />
+          <CreateNewDeck />
         </Route>
 
         <Route path="/decks/:deckId">

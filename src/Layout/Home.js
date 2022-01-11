@@ -29,7 +29,7 @@ listDecks().then((data) => setDecks(data))
     <div className="card-body">
       <h5 className="card-title"> {deck.name} </h5>
       <p className="card-text">
-     {deck.cards.length} Cards
+     {deck.cards.length} cards
       </p>
       <p className="card-text">
      {deck.description}
