@@ -13,6 +13,7 @@ function DeckForm({handleChange, handleSubmit, newDeck, history}){
             className="form-control"
             id="name"
             name="name"
+            required
             onChange={handleChange}
             value={newDeck.name}
           />
@@ -25,6 +26,7 @@ function DeckForm({handleChange, handleSubmit, newDeck, history}){
             className="form-control"
             id="desciption"
             name="description"
+            required
             onChange={handleChange}
             value={newDeck.description}
           />

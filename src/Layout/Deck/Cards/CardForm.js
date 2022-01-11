@@ -12,6 +12,7 @@ return(
             className="form-control"
             id="front"
             name="front"
+            required
             onChange={handleChange}
             value={newCard.front}
           />
@@ -24,6 +25,7 @@ return(
             className="form-control"
             id="back"
             name="back"
+            required
             onChange={handleChange}
             value={newCard.back}
           />
