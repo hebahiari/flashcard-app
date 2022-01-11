@@ -21,7 +21,7 @@ function EditDeck({ currentDeck }) {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    updateDeck(newDeck).then(() => history.push(`/decks/`));
+    updateDeck(newDeck).then(() => history.push(`/decks/${deckId}`));
   };
 
   return (
