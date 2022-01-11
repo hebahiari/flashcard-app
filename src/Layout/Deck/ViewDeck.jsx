@@ -1,28 +1,29 @@
 import { Link, useHistory } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import {
-  listDecks,
-  createDeck,
-  readDeck,
-  updateDeck,
   deleteDeck,
-  createCard,
-  readCard,
-  updateCard,
   deleteCard,
 } from "../../utils/api";
+import AddCardsButton from "../Buttons/AddCardsButton";
 
 function ViewDeck({ currentDeck }) {
   const history = useHistory();
 
   const cards = currentDeck.cards;
 
-  const handleDelete = (event) => {
-    console.log(event.target);
+  const handleDeckDelete = (event) => {
     if (
       window.confirm("Delete this deck? You will not be able to recover it.")
     ) {
       deleteDeck(event.target.id).then(() => history.push("/"));
+    }
+  };
+
+  const handleCardDelete = (event) => {
+    if (
+      window.confirm("Delete this card? You will not be able to recover it.")
+    ) {
+      deleteCard(event.target.id).then(() => history.push("/"));
     }
   };
 
@@ -48,7 +49,7 @@ function ViewDeck({ currentDeck }) {
           id={currentDeck.id}
           type="button"
           className="btn btn-secondary m-1"
-          onClick={handleDelete}
+          onClick={handleCardDelete}
         >
           Delete
         </button>
@@ -87,22 +88,17 @@ function ViewDeck({ currentDeck }) {
       >
         Study
       </button>
-      <button
-        type="button"
-        className="btn btn-secondary m-1"
-        onClick={() => history.push(`/decks/${currentDeck.id}`)}
-      >
-        View
-      </button>
 
       <button
         id={currentDeck.id}
         type="button"
         className="btn btn-secondary m-1"
-        onClick={handleDelete}
+        onClick={handleDeckDelete}
       >
         Delete
       </button>
+
+      <AddCardsButton deckId={currentDeck.id}/>
 
       <div>
         <br />

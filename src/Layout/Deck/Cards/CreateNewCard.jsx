@@ -1,9 +1,10 @@
-import { createCard } from "../../utils/api";
+import { createCard } from "../../../utils/api";
 import { Link, useHistory } from "react-router-dom";
 import React, { useState } from "react";
 
-function CreateNewDeck() {
-  const [newCard, setNewCard] = useState({ front: "", back: "" });
+function CreateNewCard({ currentDeck }) {
+  const emptyCard = { front: "", back: "" }
+  const [newCard, setNewCard] = useState(emptyCard);
   const history = useHistory();
 
   const handleChange = (event) => {
@@ -11,7 +12,7 @@ function CreateNewDeck() {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    createCard(newCard, DeckId).then(() => history.push(`/decks/`));
+    createCard(currentDeck.id, newCard).then(() => setNewCard(emptyCard));
   };
 
   return (
@@ -20,6 +21,9 @@ function CreateNewDeck() {
         <ol className="breadcrumb">
           <li className="breadcrumb-item">
             <Link to="/">Home</Link>
+          </li>
+          <li className="breadcrumb-item active" aria-current="page">
+            <Link to={`/decks/${currentDeck.id}`}>{currentDeck.name}</Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
             Create Card
@@ -31,26 +35,27 @@ function CreateNewDeck() {
 
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label for="name" className="form-label">
-            Name
+          <label for="front" className="form-label">
+            Front
           </label>
           <input
             type="text"
             className="form-control"
-            id="name"
-            name="name"
+            id="front"
+            name="front"
             onChange={handleChange}
             value={newCard.front}
           />
         </div>
         <div className="mb-3">
-          <label for="desciption" className="form-label">
-            Desciption
+          <label for="back" className="form-label">
+            Back
           </label>
-          <textarea
+          <input
+          type="text"
             className="form-control"
-            id="desciption"
-            name="description"
+            id="back"
+            name="back"
             onChange={handleChange}
             value={newCard.back}
           />
@@ -58,7 +63,7 @@ function CreateNewDeck() {
         <button type="submit" className="btn btn-primary">
           Save
         </button>
-        <button className="btn btn-primary" onClick={()=> history.go("/")}>
+        <button className="btn btn-primary" onClick={() => history.go("/")}>
           Done
         </button>
       </form>
@@ -66,4 +71,4 @@ function CreateNewDeck() {
   );
 }
 
-export default CreateNewDeck;
+export default CreateNewCard;

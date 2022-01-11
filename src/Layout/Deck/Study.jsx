@@ -9,7 +9,7 @@ import {
   updateCard,
   deleteCard,
 } from "../../utils/api";
-import AddCardsButton from "./Cards/AddCardsButton";
+import AddCardsButton from "../Buttons/AddCardsButton";
 import { Link, useHistory } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
@@ -30,7 +30,6 @@ const history = useHistory();
       className="btn btn-secondary m-1"
       onClick={() => {
         if (cardIndex+1 < cards.length) {
-          console.log(`card index:${cardIndex+1} and cards length:${cards.length}`)
           setCardIndex((currentIndex) => currentIndex + 1);
           setFront(true);
         } else {
