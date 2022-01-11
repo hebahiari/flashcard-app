@@ -15,7 +15,7 @@ function EditCard({ currentDeck }) {
 
   useEffect(() => {
     readCard(cardId).then((data) => setNewCard(data));
-  }, []);
+  }, [cardId]);
 
   const handleChange = (event) => {
     setNewCard({ ...newCard, [event.target.name]: event.target.value });

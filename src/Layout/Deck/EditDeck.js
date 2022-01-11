@@ -14,7 +14,7 @@ function EditDeck({ currentDeck }) {
 
   useEffect(() => {
     readDeck(deckId).then((data) => setNewDeck(data));
-  }, []);
+  }, [deckId]);
 
   const handleChange = (event) => {
     setNewDeck({ ...newDeck, [event.target.name]: event.target.value });

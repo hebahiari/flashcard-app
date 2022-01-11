@@ -1,5 +1,5 @@
 import { Route, Switch } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Header from "./Header";
 import NotFound from "./NotFound";
 import DeckOptions from "./Deck/DeckOptions";

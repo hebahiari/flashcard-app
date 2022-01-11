@@ -1,5 +1,5 @@
 import { Link, useHistory } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import AddCardsButton from "../Buttons/AddCardsButton";
 import EditDeckButton from "../Buttons/EditDeckButton";
 import DeleteDeckButton from "../Buttons/DeleteDeckButton";

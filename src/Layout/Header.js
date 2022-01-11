@@ -1,8 +1,7 @@
 import React from "react";
-import { useHistory, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 function Header() {
-  const history= useHistory();
 
   return (
     <header className="jumbotron bg-dark">

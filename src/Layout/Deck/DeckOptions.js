@@ -17,7 +17,7 @@ function DeckOptions() {
     if (deckId !== "new") {
       readDeck(deckId).then((data) => setCurrentDeck(data));
     }
-  }, []);
+  }, [deckId]);
 
   return (
     <div>
