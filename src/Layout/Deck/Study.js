@@ -60,7 +60,7 @@ const history = useHistory();
             You need at least 3 cards to study. there are{" "}
             {currentDeck.cards.length} in this deck.
           </h5>
-          <AddCardsButton />
+          <AddCardsButton deckId={currentDeck.id}/>
         </span>
       ) : (
         <div className="card" style={{ width: "40rem" }}>
