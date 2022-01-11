@@ -1,10 +1,16 @@
-import React from "react"
+import React, {useEffect, useState} from "react"
 import { useHistory } from "react-router-dom";
-import DeleteDeckButton from "./Buttons/DeleteDeckButton";
-import ViewDeckButton from "./Buttons/ViewDeckButton"
+import DeleteDeckButton from "../Buttons/DeleteDeckButton";
+import ViewDeckButton from "../Buttons/ViewDeckButton"
+import { listDecks } from "../../utils/api";
 
-function DeckList({ decks }) {
+function DeckList() {
   const history = useHistory();
+  const [decks, setDecks] = useState([]);
+
+  useEffect(() => {
+    listDecks().then((data) => setDecks(data));
+  }, []);
 
   return decks.map((deck, index) => {
     return (

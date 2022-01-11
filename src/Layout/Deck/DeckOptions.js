@@ -2,12 +2,13 @@ import { Switch, Route, useParams } from "react-router-dom";
 import { readDeck } from "../../utils/api";
 import EditDeck from "./EditDeck";
 import ViewDeck from "./ViewDeck";
+import EditCard from "./Cards/EditCard";
 import Study from "./Study";
 import CreateNewDeck from "./CreateNewDeck";
 import CreateNewCard from "./Cards/CreateNewCard";
 import React, { useEffect, useState } from "react";
 
-function Deck() {
+function DeckOptions() {
   const [currentDeck, setCurrentDeck] = useState({});
 
   const { deckId } = useParams();
@@ -23,6 +24,10 @@ function Deck() {
       <Switch>
         <Route path="/decks/:deckId/study">
           <Study currentDeck={currentDeck} />
+        </Route>
+
+        <Route path="/decks/:deckId/cards/:cardId/edit">
+          <EditCard currentDeck={currentDeck} />
         </Route>
 
         <Route path="/decks/:deckId/cards/new">
@@ -45,4 +50,4 @@ function Deck() {
   );
 }
 
-export default Deck;
+export default DeckOptions;

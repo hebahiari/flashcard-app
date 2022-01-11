@@ -5,6 +5,8 @@ import {
   deleteCard,
 } from "../../utils/api";
 import AddCardsButton from "../Buttons/AddCardsButton";
+import EditDeckButton from "../Buttons/EditDeckButton";
+import RenderCard from "./Cards/RenderCard";
 
 function ViewDeck({ currentDeck }) {
   const history = useHistory();
@@ -19,43 +21,11 @@ function ViewDeck({ currentDeck }) {
     }
   };
 
-  const handleCardDelete = (event) => {
-    if (
-      window.confirm("Delete this card? You will not be able to recover it.")
-    ) {
-      deleteCard(event.target.id).then(() => history.push("/"));
-    }
-  };
-
   if (!currentDeck.cards) {
     return <h3> Loading ... </h3>;
   }
 
-  const cardsList = cards.map((card) => (
-    <div className="card my-3" style={{ width: "40rem" }}>
-      <div className="card-body">
-        <p className="card-text">{card.front}</p>
-        <p className="card-text">{card.back}</p>
-
-        <button
-          type="button"
-          className="btn btn-secondary m-1"
-          onClick={() => history.push(`/decks/${currentDeck.id}/edit`)}
-        >
-          Edit
-        </button>
-
-        <button
-          id={currentDeck.id}
-          type="button"
-          className="btn btn-secondary m-1"
-          onClick={handleCardDelete}
-        >
-          Delete
-        </button>
-      </div>
-    </div>
-  ));
+  const cardsList = cards.map((card) => <RenderCard card={card} currentDeck={currentDeck} />);
 
   return (
     <div>
@@ -73,13 +43,7 @@ function ViewDeck({ currentDeck }) {
       <h5 className="card-title"> {currentDeck.name} </h5>
       <p className="card-text">{currentDeck.description}</p>
 
-      <button
-        type="button"
-        className="btn btn-secondary m-1"
-        onClick={() => history.push(`/decks/${currentDeck.id}/edit`)}
-      >
-        Edit
-      </button>
+<EditDeckButton deckId={currentDeck.id} />
 
       <button
         type="button"
