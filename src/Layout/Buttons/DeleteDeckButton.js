@@ -1,5 +1,6 @@
 import { deleteDeck } from "../../utils/api";
 import { useHistory } from "react-router-dom";
+import React from "react"
 
 function DeleteDeckButton({ deckId
  }) {
@@ -18,7 +19,7 @@ function DeleteDeckButton({ deckId
     <button
       id={deckId}
       type="button"
-      className="btn btn-secondary m-1"
+      className="btn btn-danger m-1"
       onClick={handleDelete}
     >
       Delete

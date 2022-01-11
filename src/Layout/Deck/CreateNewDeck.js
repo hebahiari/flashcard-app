@@ -1,6 +1,7 @@
 import { createDeck } from "../../utils/api";
 import { Link, useHistory } from "react-router-dom";
 import React, { useState } from "react";
+import DeckForm from "./DeckForm";
 
 function CreateNewDeck() {
   const [newDeck, setNewDeck] = useState({ name: "", description: "" });
@@ -11,7 +12,7 @@ function CreateNewDeck() {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    createDeck(newDeck).then(() => history.push(`/decks/`));
+    createDeck(newDeck).then(() => history.push(`/`));
   };
 
   return (
@@ -28,37 +29,12 @@ function CreateNewDeck() {
       </nav>
 
       <h1>Create Deck</h1>
-
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label for="name" className="form-label">
-            Name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="name"
-            name="name"
-            onChange={handleChange}
-            value={newDeck.name}
-          />
-        </div>
-        <div className="mb-3">
-          <label for="desciption" className="form-label">
-            Desciption
-          </label>
-          <textarea
-            className="form-control"
-            id="desciption"
-            name="description"
-            onChange={handleChange}
-            value={newDeck.description}
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
+      <DeckForm
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+        newDeck={newDeck}
+        history={history}
+      />
     </div>
   );
 }

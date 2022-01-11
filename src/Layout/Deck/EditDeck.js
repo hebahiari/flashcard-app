@@ -1,15 +1,21 @@
-import { updateDeck } from "../../utils/api";
-import { Link, useHistory } from "react-router-dom";
-import React, { useState } from "react";
+import { updateDeck, readDeck } from "../../utils/api";
+import { Link, useHistory, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import DeckForm from "./DeckForm";
 
 function EditDeck({ currentDeck }) {
-  const [newDeck, setNewDeck] = useState({
-    name: currentDeck.name,
-    description: currentDeck.description,
-    id: currentDeck.id,
-  });
+  const { deckId } = useParams();
   const history = useHistory();
-console.log({newDeck})
+  const [newDeck, setNewDeck] = useState({
+    name: "",
+    description: "",
+    id: deckId,
+  });
+
+  useEffect(() => {
+    readDeck(deckId).then((data) => setNewDeck(data));
+  }, []);
+
   const handleChange = (event) => {
     setNewDeck({ ...newDeck, [event.target.name]: event.target.value });
   };
@@ -35,37 +41,12 @@ console.log({newDeck})
       </nav>
 
       <h1>Edit Deck</h1>
-
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label for="name" className="form-label">
-            Name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="name"
-            name="name"
-            onChange={handleChange}
-            value={newDeck.name}
-          />
-        </div>
-        <div className="mb-3">
-          <label for="desciption" className="form-label">
-            Desciption
-          </label>
-          <textarea
-            className="form-control"
-            id="desciption"
-            name="description"
-            onChange={handleChange}
-            value={newDeck.description}
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
+      <DeckForm
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+        newDeck={newDeck}
+        history={history}
+      />
     </div>
   );
 }

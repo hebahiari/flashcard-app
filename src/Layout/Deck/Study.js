@@ -1,14 +1,3 @@
-import {
-  listDecks,
-  createDeck,
-  readDeck,
-  updateDeck,
-  deleteDeck,
-  createCard,
-  readCard,
-  updateCard,
-  deleteCard,
-} from "../../utils/api";
 import AddCardsButton from "../Buttons/AddCardsButton";
 import { Link, useHistory } from "react-router-dom";
 import React, { useEffect, useState } from "react";
@@ -27,7 +16,7 @@ const history = useHistory();
   const nextButton = (
     <button
       type="button"
-      className="btn btn-secondary m-1"
+      className="btn btn-primary m-1"
       onClick={() => {
         if (cardIndex+1 < cards.length) {
           setCardIndex((currentIndex) => currentIndex + 1);

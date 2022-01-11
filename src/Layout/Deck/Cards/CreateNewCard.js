@@ -1,6 +1,7 @@
 import { createCard } from "../../../utils/api";
 import { Link, useHistory } from "react-router-dom";
 import React, { useState } from "react";
+import CardForm from "./CardForm";
 
 function CreateNewCard({ currentDeck }) {
   const emptyCard = { front: "", back: "" }
@@ -26,47 +27,13 @@ function CreateNewCard({ currentDeck }) {
             <Link to={`/decks/${currentDeck.id}`}>{currentDeck.name}</Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
-            Create Card
+            Add Card
           </li>
         </ol>
       </nav>
 
-      <h1>Create Card</h1>
-
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label for="front" className="form-label">
-            Front
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="front"
-            name="front"
-            onChange={handleChange}
-            value={newCard.front}
-          />
-        </div>
-        <div className="mb-3">
-          <label for="back" className="form-label">
-            Back
-          </label>
-          <input
-          type="text"
-            className="form-control"
-            id="back"
-            name="back"
-            onChange={handleChange}
-            value={newCard.back}
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Save
-        </button>
-        <button className="btn btn-primary" onClick={() => history.go("/")}>
-          Done
-        </button>
-      </form>
+      <h1>{currentDeck.name}: Add Card</h1>
+<CardForm handleSubmit={handleSubmit} handleChange={handleChange} newCard={newCard} history={history}/>
     </div>
   );
 }
